@@ -1,6 +1,16 @@
+:root {
+  --dark-blue: #0B3954;
+  --light-blue: #B4CBDD;
+  --bittersweet: #FF6663;
+  --chartreuse: #D7F649;
+  --white: #FFFFFF;
+  --default-font: 'IBM Plex Sans', sans-serif;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  font-family: var(--default-font);
 }
 
 *, *:before, *:after {
