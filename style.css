@@ -7,6 +7,14 @@
   --default-font: 'IBM Plex Sans', sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
+img {
+  width: 100%;
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;
@@ -15,4 +23,81 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* Background */
+
+.background__container {
+  overflow: hidden;
+  height: 100%;
+}
+
+.background__container > img {
+  max-width: 45%;
+  transform: scale(1.75) translate(-5rem);
+}
+
+/* Cards */
+
+.card__container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+  width: 40%;
+}
+
+.card__front, .card__back {
+  position: relative;
+  min-width: 90%;
+  max-width: 30rem;
+}
+
+.card__back {
+  right: 3rem;
+}
+
+.card__front--img, .card__back--img,
+.card__front--info, .card__back--info {
+  max-width: 40rem;
+  min-width: 35rem;
+}
+
+.card__front--info, .card__back--info {
+  position: absolute;
+  display: flex;
+  bottom: 2rem;
+  width: 100%;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  color: var(--dark-blue);
+  padding: 0rem 2rem;
+}
+
+.card__front--info1 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card__front--info2 {
+  display: flex;
+  align-items: end;
+}
+
+.exp-date {
+  text-align: end;
+}
+
+.card__back--info {
+  justify-content: space-between;
+  padding-bottom: 4rem;
 }
