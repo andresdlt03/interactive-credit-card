@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" rel="stylesheet">
-  <script src="./script.js"></script>
   <title>Credit Card</title>
 </head>
 <body>
@@ -64,7 +63,7 @@
         <form class="form">
           <div class="form-group">
             <label for="cardholder-name">CARDHOLDER NAME</label>
-            <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Jane Appleseed">
+            <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Jane Appleseed" autofocus>
           </div>
           <div class="form-group">
             <label for="card-number">CARD NUMBER</label>
@@ -74,13 +73,13 @@
             <div class="form-group">
               <label for="exp-date-mm">EXP.DATE (MM-YY)</label>
               <div class="exp-date-inputs">
-                <input type="text" id="exp-date-mm" name="exp-date-mm" placeholder="MM">
-                <input type="text" id="exp-date-yy" name="exp-date-yy" placeholder="YY">
+                <input type="text" id="exp-date-mm" name="exp-date-mm" placeholder="MM" maxlength="2">
+                <input type="text" id="exp-date-yy" name="exp-date-yy" placeholder="YY" maxlength="2">
               </div>
             </div>
             <div class="form-group">
               <label for="cvv">CVV</label>
-              <input type="text" id="cvv" name="cvv" placeholder="123">
+              <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3">
             </div>
           </div>
           <button type="submit" class="button confirm-button">CONFIRM</button>
@@ -95,6 +94,7 @@
 
   </div><!-- .main__container -->
   
+  <script src="./script.js"></script>
 
 </body>
 </html>

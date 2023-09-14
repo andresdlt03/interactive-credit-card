@@ -218,3 +218,10 @@ h1, h2, h3, p {
   bottom: 4rem;
   right: 4cqw;
 }
+
+/* Invalid field message */
+
+.invalid-message {
+  font-size: 1.2rem;
+  color: var(--bittersweet)
+}
