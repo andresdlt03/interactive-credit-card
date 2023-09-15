@@ -33,7 +33,7 @@
             <p class="card__cardholder-name">Jane Appleseed</p>
           </div>
           <div class="card__front--info2">
-            <p class="card__exp-date">00/00</p>
+            <p class="card__exp-date"><span class="card__exp-date-mm">00</span>/<span class="card__exp-date-yy">00</span></p>
           </div>
         </div>
       </div><!-- .card__front -->
@@ -41,7 +41,7 @@
       <div class="card__back">
         <img src="./assets/img/card-back.svg" alt="Credit card back side" class="card__back--img">
         <div class="card__back--info">
-          <p class="card__card-number-hide">**** 0000</p>
+          <p class="card__card-number-back">**** <span class="card__card-number-hide">0000</span></p>
           <p class="card__cvv">123</p>
         </div>
       </div><!-- .card__back -->
@@ -63,11 +63,11 @@
         <form class="form">
           <div class="form-group">
             <label for="cardholder-name">CARDHOLDER NAME</label>
-            <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Jane Appleseed" autofocus>
+            <input type="text" id="cardholder-name" name="cardholder-name" placeholder="Jane Appleseed" maxlength="50" autofocus>
           </div>
           <div class="form-group">
             <label for="card-number">CARD NUMBER</label>
-            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9123 0000">
+            <input type="text" id="card-number" name="card-number" placeholder="1234567891230000" maxlength="16">
           </div>
           <div class="exp-cvv-group">
             <div class="form-group">

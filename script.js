@@ -1,16 +1,29 @@
-// Selectors
+/**
+ * SELECTORS
+ */
 
 const formContainer = document.querySelector(".form__container")
 const form = document.querySelector(".form");
+// Cardholder Name
+const cardCardholderName = document.querySelector(".card__cardholder-name");
 const cardholderName = document.querySelector("#cardholder-name");
 const cardholderNameGroup = cardholderName.parentNode;
+// Card Number
+const cardCardNumber = document.querySelector(".card__card-number");
+const cardCardNumberHide = document.querySelector(".card__card-number-hide");
 const cardNumber = document.querySelector("#card-number");
 const cardNumberGroup = cardNumber.parentNode;
+// Exp Date
+const cardExpDateMonth = document.querySelector(".card__exp-date-mm");
 const expDateMonth = document.querySelector("#exp-date-mm");
+const cardExpDateYear = document.querySelector(".card__exp-date-yy");
 const expDateYear = document.querySelector("#exp-date-yy");
 const expDateGroup = expDateMonth.parentNode.parentNode;
+// Card Cvv
+const cardCvv = document.querySelector(".card__cvv");
 const cvv = document.querySelector("#cvv");
 const cvvGroup = cvv.parentNode;
+// Confirm Button
 const confirmButton = document.querySelector(".confirm-button");
 
 const INPUTS = [
@@ -19,7 +32,16 @@ const INPUTS = [
   expDateMonth,
   expDateYear,
   cvv
-]
+];
+
+const CARD_VALUES = {
+  cardholderName: cardCardholderName,
+  cardNumber: cardCardNumber,
+  cardNumberHide: cardCardNumberHide,
+  expDateMonth: cardExpDateMonth,
+  expDateYear: cardExpDateYear,
+  cvv: cardCvv
+};
 
 /**
  * FORM VALIDATION
@@ -66,8 +88,8 @@ function validateCardholderName(value) {
 function validateCardNumber(value) {
   let valid = true;
   let errorMessage = "";
-  if(value.split(" ").join("").length != 16 || /[^0-9]/.test(value.split(" ").join(""))) {
-    errorMessage += "Card number must be 16 numbers";
+  if(value.length != 16 || /[^0-9]/.test(value)) {
+    errorMessage += "Card number must be 16 numbers (without blanks)";
     valid = false;
   }
   styleField(cardNumberGroup, cardNumber, errorMessage);
@@ -156,13 +178,52 @@ successMessage.classList.add("success__message");
 const continueButton = document.createElement("button");
 continueButton.innerHTML = "CONTINUE";
 continueButton.classList.add("button", "primary-button");
-continueButton.addEventListener("click", loadForm);
+continueButton.addEventListener("click", reloadForm);
 success.appendChild(checkIcon);
 success.appendChild(successMessage);
 success.appendChild(continueButton);
 
 /**
- * Util Functions
+ * CHANGES IN THE CARD IN REAL TIME
+ */
+
+cardholderName.addEventListener("input", ({target, target: {value}}) => {
+  if(value == "") CARD_VALUES["cardholderName"].innerHTML = target.placeholder;
+  else CARD_VALUES["cardholderName"].innerHTML = value;
+})
+
+cardNumber.addEventListener("input", ({target: {value}}) => {
+  let text = "";
+  for(let i = 0; i < value.length; i++) {
+    if(i % 4 == 0) text += " " + value[i];
+    else text += value[i]
+  }
+  if(value == "") CARD_VALUES["cardNumber"].innerHTML = "1234 5678 9123 0000";
+  else CARD_VALUES["cardNumber"].innerHTML = text;
+})
+
+cardNumber.addEventListener("input", ({target: {value}}) => {
+  if(value == "") CARD_VALUES["cardNumberHide"].innerHTML = "0000";
+  else CARD_VALUES["cardNumberHide"].innerHTML = value.slice(12, 16)
+})
+
+expDateMonth.addEventListener("input", ({target: {value}}) => {
+  if(value == "") CARD_VALUES["expDateMonth"].innerHTML = "00";
+  else CARD_VALUES["expDateMonth"].innerHTML = value;
+})
+
+expDateYear.addEventListener("input", ({target: {value}}) => {
+  if(value == "") CARD_VALUES["expDateYear"].innerHTML = "00";
+  else CARD_VALUES["expDateYear"].innerHTML = value;
+})
+
+cvv.addEventListener("input", ({target, target: {value}}) => {
+  if(value == "") CARD_VALUES["cvv"].innerHTML = target.placeholder;
+  else CARD_VALUES["cvv"].innerHTML = value;
+})
+
+/**
+ * UTIL FUNCTIONS
  */
 
 function resetForm() {
@@ -173,6 +234,6 @@ function loadSuccessMessage() {
   formContainer.replaceChild(success, form);
 }
 
-function loadForm() {
-  formContainer.replaceChild(form, success);
+function reloadForm() {
+  location.reload();
 }
