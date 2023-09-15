@@ -66,6 +66,9 @@ form.addEventListener("submit", (event) => {
   if(validateForm()) {
     resetForm();
     loadSuccessMessage();
+  } else {
+    confirmButton.classList.add("shake");
+    setTimeout(() => confirmButton.classList.remove("shake"), 750)
   }
 });
 
@@ -88,8 +91,8 @@ function validateCardholderName(value) {
 function validateCardNumber(value) {
   let valid = true;
   let errorMessage = "";
-  if(value.length != 16 || /[^0-9]/.test(value)) {
-    errorMessage += "Card number must be 16 numbers (without blanks)";
+  if(value.split(" ").join("").length != 16 || /[^0-9\s]/.test(value)) {
+    errorMessage += "Card number must be 16 numbers";
     valid = false;
   }
   styleField(cardNumberGroup, cardNumber, errorMessage);
@@ -188,23 +191,29 @@ success.appendChild(continueButton);
  */
 
 cardholderName.addEventListener("input", ({target, target: {value}}) => {
+  let valueFinal = value.trim();
   if(value == "") CARD_VALUES["cardholderName"].innerHTML = target.placeholder;
-  else CARD_VALUES["cardholderName"].innerHTML = value;
+  else {
+    if(valueFinal.length > 23) CARD_VALUES["cardholderName"].innerHTML = valueFinal.slice(0, 20) + "...";
+    else CARD_VALUES["cardholderName"].innerHTML = valueFinal
+  };
 })
 
 cardNumber.addEventListener("input", ({target: {value}}) => {
+  let valueFinal = value.split(" ").join("");
   let text = "";
-  for(let i = 0; i < value.length; i++) {
-    if(i % 4 == 0) text += " " + value[i];
-    else text += value[i]
+  for(let i = 0; i < valueFinal.length; i++) {
+    if(i % 4 == 0) text += " " + valueFinal[i];
+    else text += valueFinal[i]
   }
   if(value == "") CARD_VALUES["cardNumber"].innerHTML = "1234 5678 9123 0000";
-  else CARD_VALUES["cardNumber"].innerHTML = text;
+  else CARD_VALUES["cardNumber"].innerHTML = text.slice(0, 20);
 })
 
 cardNumber.addEventListener("input", ({target: {value}}) => {
+  let valueFinal = value.split(" ").join("");
   if(value == "") CARD_VALUES["cardNumberHide"].innerHTML = "0000";
-  else CARD_VALUES["cardNumberHide"].innerHTML = value.slice(12, 16)
+  else CARD_VALUES["cardNumberHide"].innerHTML = valueFinal.slice(12, 16)
 })
 
 expDateMonth.addEventListener("input", ({target: {value}}) => {

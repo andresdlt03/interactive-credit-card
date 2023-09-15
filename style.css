@@ -243,3 +243,18 @@ h1, h2, h3, p {
   bottom: 4rem;
   right: 4cqw;
 }
+
+/* More */
+
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-0.5rem); }
+  40% { transform: translateX(0.5rem); }
+  60% { transform: translateX(-0.5rem); }
+  80% { transform: translateX(0.5rem); }
+  100% { transform: translateX(0); }
+}
