@@ -149,7 +149,7 @@ h1, h2, h3, p {
 
 .form-separator {
   height: 0.2rem;
-  margin: 2rem 0;
+  margin: 2.5rem 0;
   background-color: rgba(161, 161, 161, 0.565);
 }
 
@@ -195,7 +195,7 @@ h1, h2, h3, p {
   gap: 3rem;
 }
 
-.confirm-button {
+.primary-button {
   height: 6rem;
   border-style: none;
   border-radius: 1rem;
@@ -207,8 +207,33 @@ h1, h2, h3, p {
   box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
 }
 
-.confirm-button:active {
+.primary-button:active {
   background-color: #c6e635;
+}
+
+/* Invalid field message */
+
+.invalid-message {
+  font-size: 1.2rem;
+  color: var(--bittersweet)
+}
+
+/* Success Message */
+.success__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.success__icon {
+  width: 6rem;
+  margin: 0 auto
+}
+
+.success__message {
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--dark-blue);
 }
 
 /* Help button */
@@ -217,11 +242,4 @@ h1, h2, h3, p {
   position: absolute;
   bottom: 4rem;
   right: 4cqw;
-}
-
-/* Invalid field message */
-
-.invalid-message {
-  font-size: 1.2rem;
-  color: var(--bittersweet)
 }

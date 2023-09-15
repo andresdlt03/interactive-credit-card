@@ -1,5 +1,6 @@
 // Selectors
 
+const formContainer = document.querySelector(".form__container")
 const form = document.querySelector(".form");
 const cardholderName = document.querySelector("#cardholder-name");
 const cardholderNameGroup = cardholderName.parentNode;
@@ -12,22 +13,39 @@ const cvv = document.querySelector("#cvv");
 const cvvGroup = cvv.parentNode;
 const confirmButton = document.querySelector(".confirm-button");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-});
+const INPUTS = [
+  cardholderName,
+  cardNumber,
+  expDateMonth,
+  expDateYear,
+  cvv
+]
 
-// Cardholder Name Validation
+/**
+ * FORM VALIDATION
+ */
+
+// Cardholder Name
 cardholderName.addEventListener("blur", ({target: {value}}) => validateCardholderName(value));
 
-// Card Number Validation
+// Card Number
 cardNumber.addEventListener("blur", ({target: {value}}) => validateCardNumber(value));
 
-// Exp. Date Validation
+// Exp. Date
 expDateMonth.addEventListener("blur", ({target: {value}}) => validateExpDateMonth(value));
 expDateYear.addEventListener("blur", ({target: {value}}) => validateExpDateYear(value));
 
-// CVV Validation
+// CVV
 cvv.addEventListener("blur", ({target: {value}}) => validateCvv(value));
+
+// Form
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if(validateForm()) {
+    resetForm();
+    loadSuccessMessage();
+  }
+});
 
 // Validation functions
 function validateCardholderName(value) {
@@ -119,4 +137,42 @@ function styleField(group, input, errorMessage) {
   
   // change border color to default
   input.style.border = "1px solid #D9D9D9";
+}
+
+/**
+ * SUCCESS MESSAGE
+ */
+
+const success = document.createElement("div");
+success.classList.add("success__container")
+const checkIcon = document.createElement("div");
+checkIcon.classList.add("success__icon");
+const checkImg = document.createElement("img");
+checkImg.src = "./assets/img/check-icon.svg";
+checkIcon.appendChild(checkImg);
+const successMessage = document.createElement("p");
+successMessage.innerHTML = "¡Information added successfully!";
+successMessage.classList.add("success__message");
+const continueButton = document.createElement("button");
+continueButton.innerHTML = "CONTINUE";
+continueButton.classList.add("button", "primary-button");
+continueButton.addEventListener("click", loadForm);
+success.appendChild(checkIcon);
+success.appendChild(successMessage);
+success.appendChild(continueButton);
+
+/**
+ * Util Functions
+ */
+
+function resetForm() {
+  for(input of INPUTS) input.value = "";
+}
+
+function loadSuccessMessage() {
+  formContainer.replaceChild(success, form);
+}
+
+function loadForm() {
+  formContainer.replaceChild(form, success);
 }
