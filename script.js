@@ -110,8 +110,8 @@ function validateExpDateMonth(value) {
 function validateExpDateYear(value) {
   let valid = true;
   let errorMessage = "";
-  if(value.length == 0 || /[^0-9]/.test(value) || value < 1 || value > 23) {
-    errorMessage += "YY must be a number greater than 0 and less than 23 (current year)";
+  if(value.length == 0 || /[^0-9]/.test(value) || value < 23 || value > 27) {
+    errorMessage += "YY must be a number greater than 23 and less than 27 (2023-2026)";
     valid = false;
   }
   styleField(expDateGroup, expDateYear, errorMessage);
