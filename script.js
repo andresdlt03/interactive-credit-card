@@ -25,6 +25,10 @@ const cvv = document.querySelector("#cvv");
 const cvvGroup = cvv.parentNode;
 // Confirm Button
 const confirmButton = document.querySelector(".confirm-button");
+// Help button
+const helpContainer = document.querySelector(".help__container");
+const helpMessage = document.querySelector(".help__message")
+const helpButton = document.querySelector(".help__button");
 
 const INPUTS = [
   cardholderName,
@@ -176,10 +180,10 @@ const checkImg = document.createElement("img");
 checkImg.src = "./assets/img/check-icon.svg";
 checkIcon.appendChild(checkImg);
 const successMessage = document.createElement("p");
-successMessage.innerHTML = "¡Information added successfully!";
+successMessage.textContent = "¡Information added successfully!";
 successMessage.classList.add("success__message");
 const continueButton = document.createElement("button");
-continueButton.innerHTML = "CONTINUE";
+continueButton.textContent = "CONTINUE";
 continueButton.classList.add("button", "primary-button");
 continueButton.addEventListener("click", reloadForm);
 success.appendChild(checkIcon);
@@ -213,7 +217,7 @@ cardNumber.addEventListener("input", ({target: {value}}) => {
 cardNumber.addEventListener("input", ({target: {value}}) => {
   let valueFinal = value.split(" ").join("");
   if(value == "") CARD_VALUES["cardNumberHide"].innerHTML = "0000";
-  else CARD_VALUES["cardNumberHide"].innerHTML = valueFinal.slice(12, 16)
+  else CARD_VALUES["cardNumberHide"].innerHTML = valueFinal.slice(12, 16);
 })
 
 expDateMonth.addEventListener("input", ({target: {value}}) => {
@@ -229,6 +233,25 @@ expDateYear.addEventListener("input", ({target: {value}}) => {
 cvv.addEventListener("input", ({target, target: {value}}) => {
   if(value == "") CARD_VALUES["cvv"].innerHTML = target.placeholder;
   else CARD_VALUES["cvv"].innerHTML = value;
+})
+
+/**
+ * HELP BUTTON
+ */
+
+helpButton.addEventListener("click", () => {
+  // helpMessage.style.display = (helpMessage.style.display === "none") ? "block" : "none"
+  if(helpMessage.style.display == "none" || helpMessage.style.display == "") {
+    helpMessage.style.display = "block";
+    helpMessage.classList.add("fadeIn");
+    setTimeout(() => helpMessage.classList.remove("fadeIn"), 300)
+  } else {
+    helpMessage.classList.add("fadeOut");
+    setTimeout(() => {
+      helpMessage.classList.remove("fadeOut");
+      helpMessage.style.display = "none";
+    }, 300);
+  }
 })
 
 /**
